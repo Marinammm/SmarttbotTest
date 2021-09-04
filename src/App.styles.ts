@@ -6,3 +6,7 @@ export const Background = styled.div`
   height: 648px;
   font-family: 'Roboto';
 `;
+
+export const PageWrapper = styled.div`
+  margin-left: 100px;
+`;
