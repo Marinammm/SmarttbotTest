@@ -2,7 +2,7 @@ import React, { FC } from 'react';
 import * as S from './Card.styles';
 
 type CardProps = {
-  children: JSX.Element;
+  children: React.ReactNode;
 };
 
 const Card: FC<CardProps> = ({ children }: CardProps) => (
