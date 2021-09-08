@@ -56,6 +56,7 @@ export const Papers = styled.div`
   display: grid;
   grid-template-columns: 1fr 1fr;
   font-size: 12px;
+  margin-top: 15px;
 `;
 
 export const PaperWrapper = styled.div`
