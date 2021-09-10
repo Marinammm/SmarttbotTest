@@ -4,6 +4,7 @@ import { getOverview } from 'store/overview/overview.useCases';
 import { RootState } from 'store/reducers';
 import Card from 'components/structure/Card/Card';
 import { v4 as uuidv4 } from 'uuid';
+import { ColorfulNumber } from 'utils/global.styles';
 import * as S from './Overview.styles';
 
 const Overview: FC = () => {
@@ -23,13 +24,13 @@ const Overview: FC = () => {
           <S.Info>
             <S.InfoItem>
               <span>Resumo de movimentação</span>
-              <S.Number sign={Math.sign(overviewData.moviment_summary)}>
+              <ColorfulNumber sign={Math.sign(overviewData.moviment_summary)}>
                 {overviewData.moviment_summary}
-              </S.Number>
+              </ColorfulNumber>
             </S.InfoItem>
             <S.InfoItem>
               <span>Total de transações realizadas</span>
-              <S.Number sign={0}>{overviewData.transactions}</S.Number>
+              <ColorfulNumber sign={0}>{overviewData.transactions}</ColorfulNumber>
             </S.InfoItem>
           </S.Info>
 

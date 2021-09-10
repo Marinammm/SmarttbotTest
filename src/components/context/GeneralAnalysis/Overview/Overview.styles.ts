@@ -18,14 +18,11 @@ export const InfoItem = styled.div`
   display: flex;
   flex-direction: column;
   align-items: flex-start;
+  font-size: 12px;
+  color: #8a888b;
   
   &:last-of-type {
     align-items: flex-end !important;
-  }
-  
-  span {
-    font-size: 12px;
-    color: #8a888b;
   }
 `;
 
