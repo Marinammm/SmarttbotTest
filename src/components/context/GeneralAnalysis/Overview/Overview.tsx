@@ -13,7 +13,7 @@ const Overview: FC = () => {
     dispatch(getOverview());
   }, []);
 
-  const overviewData = useSelector((state: RootState) => state.overview).data;
+  const overviewData = useSelector((state: RootState) => state.overview.data);
 
   return (
     <Card>

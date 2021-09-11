@@ -1,11 +1,20 @@
-import React, { FC, useState } from 'react';
+import React, { FC, useState, useEffect } from 'react';
+import { useDispatch } from 'react-redux';
 import Card from 'components/structure/Card/Card';
 import sinal from 'assets/images/sinal.png';
 import Switch from 'react-switch';
+import { getRobotsList } from 'store/robotsList/robotsList.useCases';
+import { changeMode } from 'store/robotsList/robotsList.actions';
 import * as S from './Title.styles';
 
 const Title: FC = () => {
-  const [mode, setMode] = useState(0);
+  const [mode, setMode] = useState(1);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(changeMode(mode));
+    dispatch(getRobotsList(mode));
+  }, [mode]);
 
   return (
     <Card>

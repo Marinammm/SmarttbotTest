@@ -3,10 +3,8 @@ export const GET_OVERVIEW_SUCCESS = 'GET_OVERVIEW_SUCCESS';
 export const GET_OVERVIEW_FAILED = 'GET_OVERVIEW_FAILED';
 
 export interface OverviewProps {
-  // eslint-disable-next-line camelcase
   moviment_summary: number;
   transactions: number;
-  // eslint-disable-next-line camelcase
   open_positions: number;
   papers: Array<{
     name: string;
@@ -17,12 +15,13 @@ export interface OverviewProps {
 export interface Overview {
   data?: OverviewProps;
   loading: boolean;
-  // eslint-disable-next-line @typescript-eslint/ban-types
-  error?: {};
+  error?: Error;
 }
 
-// eslint-disable-next-line @typescript-eslint/no-empty-interface
-export interface Error {}
+export interface Error {
+  message: string;
+  code: string;
+}
 
 export interface GetOverview {
   type: typeof GET_OVERVIEW;

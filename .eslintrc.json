@@ -29,7 +29,8 @@
         "@typescript-eslint/no-shadow": ["error"],
         "import/prefer-default-export": "off",
         "react/prop-types": "off",
-        "react/require-default-props":  "off"
+        "react/require-default-props":  "off",
+        "camelcase": "off"
     },
     "settings": {
         "import/resolver": {

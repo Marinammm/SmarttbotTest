@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 export const Wrapper = styled.div`
-  position: absolute;
+  position: fixed;
   height: calc(100% - 77px);
   background-color: white;
   border-radius: 6px;
@@ -10,6 +10,7 @@ export const Wrapper = styled.div`
   transition: width 0.5s ease;
   overflow: hidden;
   padding: 15px 0 0 10px;
+  z-index: 2;
   
   &:hover {
     width: 150px;

@@ -11,6 +11,6 @@ export const getOverview = ()
     const { data: { data } } = await api.get('/robot/overview');
     dispatch(actions.getOverviewSuccess(data));
   } catch (error: any) {
-    dispatch(actions.getOverviewFailed(error));
+    dispatch(actions.getOverviewFailed(error.response.data));
   }
 };
