@@ -2,6 +2,7 @@ import React, { FC } from 'react';
 import { useSelector } from 'react-redux';
 import Title from 'components/context/GeneralAnalysis/Title/Title';
 import Overview from 'components/context/GeneralAnalysis/Overview/Overview';
+import AddRobot from 'components/context/GeneralAnalysis/AddRobot/AddRobot';
 import Robot from 'components/context/GeneralAnalysis/Robot/Robot';
 import { RootState } from 'store/reducers';
 import { v4 as uuidv4 } from 'uuid';
@@ -16,6 +17,7 @@ const GeneralAnalysis: FC = () => {
     <S.Wrapper>
       <Title />
       <Overview />
+      <AddRobot />
       <S.RobotCards>
         {robots?.map((robot) => (
           <Robot robot={robot} key={uuidv4()} />
