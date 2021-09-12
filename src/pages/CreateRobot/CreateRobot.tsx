@@ -1,17 +1,25 @@
-import React, { FC } from 'react';
+import React, { FC, useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import Select from 'react-select';
 import { useForm, Controller } from 'react-hook-form';
 import Card from 'components/structure/Card/Card';
 import TextInput from 'components/form/TextInput/TextInput';
 import SwitchInput from 'components/form/SwitchInput/SwitchInput';
+import { getStrategies } from 'store/strategy/strategy.useCases';
+import { getBrokers } from 'store/broker/broker.useCases';
+import { RootState } from 'store/reducers';
 import * as S from './CreateRobot.styles';
 
 const CreateRobot: FC = () => {
-  const options = [
-    { value: '1', label: '1' },
-    { value: '2', label: '2' },
-    { value: '3', label: '3' },
-  ];
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(getStrategies());
+    dispatch(getBrokers());
+  }, []);
+
+  const strategyOptions = useSelector((state: RootState) => state.strategy.data);
+  const brokerOptions = useSelector((state: RootState) => state.broker.data);
 
   const {
     handleSubmit,
@@ -37,7 +45,7 @@ const CreateRobot: FC = () => {
             render={({ field }) => (
               <Select
                 {...field}
-                options={options}
+                options={strategyOptions}
                 placeholder="Estratégia"
                 value={field.value}
                 onChange={(v) => field.onChange(v)}
@@ -92,7 +100,7 @@ const CreateRobot: FC = () => {
               render={({ field }) => (
                 <Select
                   {...field}
-                  options={options}
+                  options={brokerOptions}
                   placeholder="Corretora"
                   value={field.value}
                   onChange={(v) => field.onChange(v)}
