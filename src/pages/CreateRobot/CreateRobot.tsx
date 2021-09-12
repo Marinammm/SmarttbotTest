@@ -7,8 +7,25 @@ import TextInput from 'components/form/TextInput/TextInput';
 import SwitchInput from 'components/form/SwitchInput/SwitchInput';
 import { getStrategies } from 'store/strategy/strategy.useCases';
 import { getBrokers } from 'store/broker/broker.useCases';
+import { createRobot } from 'store/robot/robot.useCases';
 import { RootState } from 'store/reducers';
+import { getCreateRobotPayload } from 'utils/auxiliary';
 import * as S from './CreateRobot.styles';
+
+export type FormData = {
+  strategy: {
+    label: string;
+    value: number;
+  };
+  title: string;
+  initial_capital: string;
+  mode?: boolean;
+  broker?: {
+    label: string;
+    value: number;
+  };
+  type?: boolean;
+};
 
 const CreateRobot: FC = () => {
   const dispatch = useDispatch();
@@ -27,19 +44,23 @@ const CreateRobot: FC = () => {
     watch,
     formState: { isValid },
   } = useForm({
-    mode: 'onSubmit',
+    mode: 'onChange',
   });
 
   const mode = watch('mode');
 
-  const onSubmit = (data: any) => console.log(data);
+  const onSubmit = (data: FormData) => {
+    const payload = getCreateRobotPayload(data);
+
+    dispatch(createRobot(payload));
+  };
 
   return (
     <Card>
       <S.Content>
         <S.Form onSubmit={handleSubmit(onSubmit)}>
           <Controller
-            name="strategy_id"
+            name="strategy"
             control={control}
             rules={{ required: true }}
             render={({ field }) => (
@@ -94,7 +115,7 @@ const CreateRobot: FC = () => {
           />
           {mode ? (
             <Controller
-              name="broker_id"
+              name="broker"
               control={control}
               rules={{ required: mode }}
               render={({ field }) => (
