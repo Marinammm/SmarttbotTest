@@ -1,4 +1,5 @@
-import React, { FC } from 'react';
+import React, { FC, useState } from 'react';
+import { useDispatch } from 'react-redux';
 import {
   LineChart,
   Line,
@@ -8,6 +9,7 @@ import {
   Tooltip,
 } from 'recharts';
 import Card from 'components/structure/Card/Card';
+import { startStopRobot } from 'store/robot/robot.useCases';
 import { MovimentationType, RobotsListProps } from 'store/robotsList/robotsList.types';
 import { Subtitle, ColorfulNumber } from 'utils/global.styles';
 import { IoMdArrowDropdown, IoMdArrowDropup } from 'react-icons/io';
@@ -21,6 +23,9 @@ type RobotProps = {
 };
 
 const Robot: FC<RobotProps> = ({ robot }: RobotProps) => {
+  const [runningState, setRunningState] = useState(robot.running);
+  const dispatch = useDispatch();
+
   const tzOffset = new Date().getTimezoneOffset() * 60000;
   const today = new Date(Date.now() - tzOffset).toISOString().split('T')[0];
   const todayMovements = robot.movimentations.filter((movement: MovimentationType) => movement.date.split(' ')[0] === today);
@@ -28,6 +33,16 @@ const Robot: FC<RobotProps> = ({ robot }: RobotProps) => {
     ...movement,
     date: movement.date.split(' ')[1].split(':')[0],
   }));
+
+  const stop = () => {
+    dispatch(startStopRobot(robot.id, true));
+    setRunningState(0);
+  };
+
+  const start = () => {
+    dispatch(startStopRobot(robot.id, false));
+    setRunningState(1);
+  };
 
   return (
     <Card>
@@ -44,7 +59,7 @@ const Robot: FC<RobotProps> = ({ robot }: RobotProps) => {
               </S.Title>
               <S.Running>
                 <S.RunningIcon running={robot.running} />
-                {robot.running ? 'Em execução' : 'Pausado'}
+                {runningState ? 'Em execução' : 'Pausado'}
               </S.Running>
             </S.GeneralInfo>
 
@@ -119,7 +134,7 @@ const Robot: FC<RobotProps> = ({ robot }: RobotProps) => {
             </LineChart>
           </S.ChartData>
           <S.PauseIcon>
-            {robot.running ? <GiPauseButton /> : <IoPlay />}
+            {runningState ? <GiPauseButton onClick={stop} /> : <IoPlay onClick={start} />}
           </S.PauseIcon>
         </S.Content>
       )}

@@ -16,6 +16,6 @@ export const getStrategies = ()
     }));
     dispatch(actions.getStrategiesSuccess(formData));
   } catch (error: any) {
-    dispatch(actions.getStrategiesFailed(error));
+    dispatch(actions.getStrategiesFailed(error.response.data));
   }
 };

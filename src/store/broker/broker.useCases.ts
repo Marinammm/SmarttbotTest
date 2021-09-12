@@ -16,6 +16,6 @@ export const getBrokers = ()
     }));
     dispatch(actions.getBrokersSuccess(formData));
   } catch (error: any) {
-    dispatch(actions.getBrokersFailed(error));
+    dispatch(actions.getBrokersFailed(error.response.data));
   }
 };

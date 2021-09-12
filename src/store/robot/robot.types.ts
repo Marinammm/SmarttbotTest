@@ -2,6 +2,10 @@ export const CREATE_ROBOT = 'CREATE_ROBOT';
 export const CREATE_ROBOT_SUCCESS = 'CREATE_ROBOT_SUCCESS';
 export const CREATE_ROBOT_FAILED = 'CREATE_ROBOT_FAILED';
 
+export const START_STOP_ROBOT = 'START_STOP_ROBOT';
+export const START_STOP_ROBOT_SUCCESS = 'START_STOP_ROBOT_SUCCESS';
+export const START_STOP_ROBOT_FAILED = 'START_STOP_ROBOT_FAILED';
+
 export interface RobotProps {
   id: number;
   title: string;
@@ -52,4 +56,28 @@ export interface CreateRobotFailed {
   error: Error;
 }
 
-export type RobotActionsType = CreateRobot | CreateRobotSuccess | CreateRobotFailed;
+export interface StartStopRobot {
+  type: typeof START_STOP_ROBOT;
+}
+
+export interface StartStopRobotSuccess {
+  type: typeof START_STOP_ROBOT_SUCCESS;
+  payload: RobotProps;
+}
+
+export interface StartStopRobotFailed {
+  type: typeof START_STOP_ROBOT_FAILED;
+  error: Error;
+}
+
+export type RobotActionsType =
+  | CreateRobot
+  | CreateRobotSuccess
+  | CreateRobotFailed
+  | StartStopRobot
+  | StartStopRobotSuccess
+  | StartStopRobotFailed;
+
+export type RobotSuccessType = CreateRobotSuccess | StartStopRobotSuccess;
+
+export type RobotFailedType = CreateRobotFailed | StartStopRobotFailed;
