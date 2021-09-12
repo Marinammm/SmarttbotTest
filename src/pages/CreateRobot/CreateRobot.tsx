@@ -1,13 +1,127 @@
 import React, { FC } from 'react';
+import Select from 'react-select';
+import { useForm, Controller } from 'react-hook-form';
 import Card from 'components/structure/Card/Card';
+import TextInput from 'components/form/TextInput/TextInput';
+import SwitchInput from 'components/form/SwitchInput/SwitchInput';
 import * as S from './CreateRobot.styles';
 
-const CreateRobot: FC = () => (
-  <Card>
-    <S.Content>
-      oi
-    </S.Content>
-  </Card>
-);
+const CreateRobot: FC = () => {
+  const options = [
+    { value: '1', label: '1' },
+    { value: '2', label: '2' },
+    { value: '3', label: '3' },
+  ];
+
+  const {
+    handleSubmit,
+    control,
+    watch,
+    formState: { isValid },
+  } = useForm({
+    mode: 'onSubmit',
+  });
+
+  const mode = watch('mode');
+
+  const onSubmit = (data: any) => console.log(data);
+
+  return (
+    <Card>
+      <S.Content>
+        <S.Form onSubmit={handleSubmit(onSubmit)}>
+          <Controller
+            name="strategy_id"
+            control={control}
+            rules={{ required: true }}
+            render={({ field }) => (
+              <Select
+                {...field}
+                options={options}
+                placeholder="Estratégia"
+                value={field.value}
+                onChange={(v) => field.onChange(v)}
+              />
+            )}
+          />
+          <Controller
+            name="title"
+            control={control}
+            rules={{ required: true }}
+            render={({ field }) => (
+              <TextInput
+                {...field}
+                label="Nome do robô"
+                value={field.value}
+                onChange={(v) => field.onChange(v)}
+              />
+            )}
+          />
+          <Controller
+            name="initial_capital"
+            control={control}
+            rules={{ required: true }}
+            render={({ field }) => (
+              <TextInput
+                {...field}
+                label="Capital initial"
+                currency
+                value={field.value}
+                onChange={(v) => field.onChange(v)}
+              />
+            )}
+          />
+          <Controller
+            name="mode"
+            control={control}
+            defaultValue={false}
+            render={({ field }) => (
+              <SwitchInput
+                option1="Simulado"
+                option2="Real"
+                checked={field.value}
+                onChange={(v: any) => field.onChange(v)}
+              />
+            )}
+          />
+          {mode ? (
+            <Controller
+              name="broker_id"
+              control={control}
+              rules={{ required: mode }}
+              render={({ field }) => (
+                <Select
+                  {...field}
+                  options={options}
+                  placeholder="Corretora"
+                  value={field.value}
+                  onChange={(v) => field.onChange(v)}
+                />
+              )}
+            />
+          ) : (
+            <Controller
+              name="type"
+              control={control}
+              defaultValue={false}
+              render={({ field }) => (
+                <SwitchInput
+                  option1="Otimista"
+                  option2="Pessimista"
+                  checked={field.value}
+                  onChange={(v: any) => field.onChange(v)}
+                />
+              )}
+            />
+          )}
+          <S.Submit>
+            <S.Button type="submit">Criar robô</S.Button>
+            {!isValid && <S.Error>Todos os campos devem ser preenchidos</S.Error>}
+          </S.Submit>
+        </S.Form>
+      </S.Content>
+    </Card>
+  );
+};
 
 export default CreateRobot;
