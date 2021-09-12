@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import media from 'styled-media-query';
 
 export const Wrapper = styled.div`
   position: fixed;
@@ -15,6 +16,10 @@ export const Wrapper = styled.div`
   &:hover {
     width: 150px;
   }
+
+  ${media.lessThan('small')`
+    display: none;
+  `}
 `;
 
 export const Divisor = styled.div`

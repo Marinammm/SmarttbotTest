@@ -1,12 +1,13 @@
 import styled from 'styled-components';
-
-type OptionProps = {
-  isActive: boolean;
-};
+import media from 'styled-media-query';
 
 export const Content = styled.div`
   display: flex;
   justify-content: space-between;
+
+  ${media.lessThan('medium')`
+    flex-direction: column;
+  `}
 `;
 
 export const Description = styled.div`
@@ -14,6 +15,7 @@ export const Description = styled.div`
   align-items: center;
   span {
     font-size: 16px;
+
     &:nth-of-type(1) {
       font-weight: 500;
     }
@@ -24,29 +26,22 @@ export const Description = styled.div`
       color: #00b39d;
     }
   }
+
+  ${media.lessThan('medium')`
+    margin-bottom: 30px;
+    
+    img {
+      margin-right: 10px;
+    }
+  `}
 `;
 
 export const Divisor = styled.div`
-  border-right: 2px solid #dfdfdf;
+  border-right: ${({ theme }) => `2px solid ${theme.colors.typography.divisor}`};
   margin: 0 15px;
-`;
+  height: 100%;
 
-export const StyledSwitch = styled.div`
-  display: flex;
-  align-items: center;
-`;
-
-export const Option = styled.span<OptionProps>`
-  font-size: 16px;
-  transition: all 0.5s ease;
-  color: ${({ isActive }) => (isActive ? '#000000' : '#8a888b')};
-  font-weight: ${({ isActive }) => (isActive ? 500 : 400)};
-  
-  &:first-of-type {
-    margin-right: 8px;
-  }
-  
-  &:last-of-type {
-    margin-left: 8px;
-  }
+  ${media.lessThan('medium')`
+    display: none;
+  `}
 `;

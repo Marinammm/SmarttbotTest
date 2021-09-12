@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import media from 'styled-media-query';
 
 type RunningIconProps = {
   running: number;
@@ -11,6 +12,10 @@ type ProfitProps = {
 export const Content = styled.div`
   display: flex;
   position: relative;
+
+  ${media.lessThan('medium')`
+    flex-direction: column;
+  `}
 `;
 
 export const Info = styled.div`
@@ -124,6 +129,11 @@ export const ChartData = styled.div`
   flex-direction: column;
   margin-left: 20px;
   flex: 1;
+
+  ${media.lessThan('medium')`
+    margin-top: 30px;
+    margin-left: 0;
+  `}
 `;
 
 export const PauseIcon = styled.div`
@@ -131,4 +141,8 @@ export const PauseIcon = styled.div`
   color: ${({ theme }) => theme.colors.typography.dark};
   right: 0;
   cursor: pointer;
+
+  ${media.lessThan('medium')`
+    top: 230px;
+  `}
 `;

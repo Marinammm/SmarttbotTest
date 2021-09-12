@@ -1,4 +1,13 @@
 import styled from 'styled-components';
+import media from 'styled-media-query';
+
+export const PageWrapper = styled.div`
+  margin-left: 100px;
+
+  ${media.lessThan('medium')`
+      margin: 80px 0;
+    `}
+`;
 
 export const Subtitle = styled.span`
   font-size: 12px;

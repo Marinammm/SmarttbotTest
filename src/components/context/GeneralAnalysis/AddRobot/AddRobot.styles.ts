@@ -1,13 +1,22 @@
 import styled from 'styled-components';
+import media from 'styled-media-query';
 
 export const Content = styled.div`
   display: flex;
   justify-content: space-between;
+
+  ${media.lessThan('medium')`
+    flex-direction: column;
+  `}
 `;
 
 export const AddRobot = styled.div`
   display: flex;
   align-items: center;
+
+  ${media.lessThan('medium')`
+    margin-bottom: 15px;
+  `}
 `;
 
 export const AddRobotIcon = styled.div`

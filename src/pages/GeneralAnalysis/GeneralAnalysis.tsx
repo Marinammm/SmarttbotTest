@@ -15,9 +15,15 @@ const GeneralAnalysis: FC = () => {
 
   return (
     <S.Wrapper>
-      <Title />
-      <Overview />
-      <AddRobot />
+      <S.PageItem>
+        <Title />
+      </S.PageItem>
+      <S.PageItem>
+        <Overview />
+      </S.PageItem>
+      <S.PageItem>
+        <AddRobot />
+      </S.PageItem>
       <S.RobotCards>
         {robots?.map((robot) => (
           <Robot robot={robot} key={uuidv4()} />

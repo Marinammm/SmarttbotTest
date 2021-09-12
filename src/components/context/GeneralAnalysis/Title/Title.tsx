@@ -1,8 +1,8 @@
 import React, { FC, useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import Card from 'components/structure/Card/Card';
+import SwitchInput from 'components/form/SwitchInput/SwitchInput';
 import sinal from 'assets/images/sinal.png';
-import Switch from 'react-switch';
 import { getRobotsList } from 'store/robotsList/robotsList.useCases';
 import { changeMode } from 'store/robotsList/robotsList.actions';
 import * as S from './Title.styles';
@@ -26,19 +26,12 @@ const Title: FC = () => {
           <span>&nbsp;/&nbsp;</span>
           <span>Principal</span>
         </S.Description>
-        <S.StyledSwitch>
-          <S.Option isActive={!mode}>Modo Simulado</S.Option>
-          <Switch
-            checked={!!mode}
-            onChange={() => setMode(Math.abs(mode - 1))}
-            onColor="#00b39d"
-            offColor="#098475"
-            uncheckedIcon={false}
-            checkedIcon={false}
-            handleDiameter={15}
-          />
-          <S.Option isActive={!!mode}>Modo Real</S.Option>
-        </S.StyledSwitch>
+        <SwitchInput
+          option1="Modo simulado"
+          option2="Modo real"
+          checked={!!mode}
+          onChange={() => setMode(Math.abs(mode - 1))}
+        />
       </S.Content>
     </Card>
   );

@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import media from 'styled-media-query';
 
 type NumberProps = {
   sign: number;
@@ -12,6 +13,10 @@ export const Info = styled.div`
   display: flex;
   justify-content: space-between;
   margin-top: 30px;
+
+  ${media.lessThan('medium')`
+    flex-direction: column;
+  `}
 `;
 
 export const InfoItem = styled.div`
@@ -23,20 +28,12 @@ export const InfoItem = styled.div`
   
   &:last-of-type {
     align-items: flex-end !important;
-  }
-`;
 
-export const Number = styled.span<NumberProps>`
-  font-size: 16px !important;
-  font-weight: 500 !important;
-  color: ${({ sign }) => {
-    switch (sign) {
-      case 0: return '#000000';
-      case 1: return '#098475';
-      case -1: return '#ff4501';
-      default: return '#000000';
-    }
-  }} !important;
+    ${media.lessThan('medium')`
+      align-items: flex-start !important;
+      margin-top: 15px;
+    `}
+  }
 `;
 
 export const Divisor = styled.div`
@@ -54,6 +51,10 @@ export const Papers = styled.div`
   grid-template-columns: 1fr 1fr;
   font-size: 12px;
   margin-top: 15px;
+
+  ${media.lessThan('medium')`
+    grid-template-columns: 1fr;
+  `}
 `;
 
 export const PaperWrapper = styled.div`
@@ -63,6 +64,10 @@ export const PaperWrapper = styled.div`
   
   &:nth-child(odd) {
     margin-right: 50px;
+
+    ${media.lessThan('medium')`
+      margin-right: 0;
+    `}
   }
   
   span {
