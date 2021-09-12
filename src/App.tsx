@@ -1,8 +1,8 @@
 import React, { FC } from 'react';
 import { Provider } from 'react-redux';
 import Menu from 'components/structure/Menu/Menu';
-import GeneralAnalysis from 'pages/GeneralAnalysis/GeneralAnalysis';
 import { ThemeProvider } from 'styled-components';
+import Routes from './utils/routes';
 import store from './store';
 import * as S from './App.styles';
 import theme from './utils/theme';
@@ -13,7 +13,7 @@ const App: FC = () => (
       <S.Background>
         <Menu />
         <S.PageWrapper>
-          <GeneralAnalysis />
+          <Routes />
         </S.PageWrapper>
       </S.Background>
     </ThemeProvider>

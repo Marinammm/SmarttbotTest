@@ -1,15 +1,16 @@
 import React, { FC } from 'react';
 import Card from 'components/structure/Card/Card';
 import { Subtitle } from 'utils/global.styles';
-import { FaRobot } from 'react-icons/fa';
+import { history } from 'utils/routes';
+import add from 'assets/images/add.png';
 import * as S from './AddRobot.styles';
 
 const AddRobot: FC = () => (
   <Card>
     <S.Content>
       <S.AddRobot>
-        <S.AddRobotIcon>
-          <FaRobot />
+        <S.AddRobotIcon onClick={() => history.push('/criar-robo')}>
+          <img src={add} alt="add robot" />
         </S.AddRobotIcon>
         <S.AddRobotText>
           Adicionar novo Robô

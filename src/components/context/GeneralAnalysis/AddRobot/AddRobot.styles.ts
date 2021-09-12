@@ -12,17 +12,23 @@ export const AddRobot = styled.div`
 
 export const AddRobotIcon = styled.div`
   border: ${({ theme }) => `1px solid ${theme.colors.typography.border}`};
+  border-radius: 5px;
   height: 100px;
   width: 100px;
   display: flex;
   justify-content: center;
   align-items: center;
   cursor: pointer;
-  font-size: 22px;
-  transition: all 0.5s ease;
   
-  &:hover {
-    font-size: 30px;
+  img {
+    width: 46px;
+    height: 30px;
+    transition: all 0.5s ease;
+
+    &:hover {
+      width: 56px;
+      height: 40px;
+    } 
   }
 `;
 
