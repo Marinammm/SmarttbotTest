@@ -29,7 +29,10 @@ export const startStopRobot = (id: number, stop: boolean)
     dispatch(actions.startStopRobotSuccess(data));
     toast.success(`Robô ${stop ? 'parado' : 'iniciado'} com sucesso!`);
   } catch (error: any) {
-    dispatch(actions.startStopRobotFailed(error.response.data));
+    dispatch(actions.startStopRobotFailed(error?.response?.data || {
+      message: 'CORS',
+      code: 'CORS',
+    }));
     toast.error(`Não foi possível ${stop ? 'parar' : 'iniciar'} o robô`);
   }
 };

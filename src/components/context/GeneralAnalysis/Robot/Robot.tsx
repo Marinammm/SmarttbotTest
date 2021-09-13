@@ -1,5 +1,10 @@
-import React, { FC, useState, useMemo } from 'react';
-import { useDispatch } from 'react-redux';
+import React, {
+  FC,
+  useEffect,
+  useState,
+  useMemo,
+} from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import {
   LineChart,
   Line,
@@ -17,6 +22,7 @@ import { GiPauseButton } from 'react-icons/gi';
 import { IoPlay } from 'react-icons/io5';
 import { FaRegSadTear } from 'react-icons/fa';
 import { formatMoney } from 'utils/auxiliary';
+import { RootState } from 'store/reducers';
 import * as S from './Robot.styles';
 
 type RobotProps = {
@@ -25,7 +31,12 @@ type RobotProps = {
 
 const Robot: FC<RobotProps> = ({ robot }: RobotProps) => {
   const [runningState, setRunningState] = useState(robot.running);
+  const { loading, error } = useSelector((state: RootState) => state.robot);
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    if (!loading && !error) setRunningState((prev) => Math.abs(prev - 1));
+  }, [loading, error]);
 
   const tzOffset = new Date().getTimezoneOffset() * 60000;
   const today = new Date(Date.now() - tzOffset).toISOString().split('T')[0];
@@ -40,12 +51,10 @@ const Robot: FC<RobotProps> = ({ robot }: RobotProps) => {
 
   const stop = () => {
     dispatch(startStopRobot(robot.id, true));
-    setRunningState(0);
   };
 
   const start = () => {
     dispatch(startStopRobot(robot.id, false));
-    setRunningState(1);
   };
 
   return (
