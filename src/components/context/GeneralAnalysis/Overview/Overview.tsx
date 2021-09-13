@@ -5,19 +5,24 @@ import { RootState } from 'store/reducers';
 import Card from 'components/structure/Card/Card';
 import { v4 as uuidv4 } from 'uuid';
 import { ColorfulNumber } from 'utils/global.styles';
+import Loading from 'components/structure/Loading/Loading';
 import * as S from './Overview.styles';
 
 const Overview: FC = () => {
   const dispatch = useDispatch();
+
   useEffect(() => {
     dispatch(getOverview());
   }, []);
 
   const overviewData = useSelector((state: RootState) => state.overview.data);
+  const loading = useSelector((state: RootState) => state.overview.loading);
 
   return (
     <Card>
-      {overviewData && (
+      {loading || !overviewData ? (
+        <Loading />
+      ) : (
         <>
           <S.Title>Resumo geral operações</S.Title>
 

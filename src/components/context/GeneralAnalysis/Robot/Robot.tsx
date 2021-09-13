@@ -1,4 +1,4 @@
-import React, { FC, useState } from 'react';
+import React, { FC, useState, useMemo } from 'react';
 import { useDispatch } from 'react-redux';
 import {
   LineChart,
@@ -28,11 +28,14 @@ const Robot: FC<RobotProps> = ({ robot }: RobotProps) => {
 
   const tzOffset = new Date().getTimezoneOffset() * 60000;
   const today = new Date(Date.now() - tzOffset).toISOString().split('T')[0];
-  const todayMovements = robot.movimentations.filter((movement: MovimentationType) => movement.date.split(' ')[0] === today);
-  const chartData = todayMovements.map((movement: MovimentationType) => ({
-    ...movement,
-    date: movement.date.split(' ')[1].split(':')[0],
-  }));
+
+  const chartData = useMemo(() => {
+    const todayMovements = robot.movimentations.filter((movement: MovimentationType) => movement.date.split(' ')[0] === today);
+    return todayMovements.map((movement: MovimentationType) => ({
+      ...movement,
+      date: movement.date.split(' ')[1].split(':')[0],
+    }));
+  }, [robot]);
 
   const stop = () => {
     dispatch(startStopRobot(robot.id, true));

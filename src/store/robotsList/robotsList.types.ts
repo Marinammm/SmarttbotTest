@@ -1,7 +1,6 @@
 export const GET_ROBOTS_LIST = 'GET_ROBOTS_LIST';
 export const GET_ROBOTS_LIST_SUCCESS = 'GET_ROBOTS_LIST_SUCCESS';
 export const GET_ROBOTS_LIST_FAILED = 'GET_ROBOTS_LIST_FAILED';
-export const CHANGE_MODE = 'CHANGE_MODE';
 
 export interface RobotsListProps {
   id: number;
@@ -43,12 +42,16 @@ export interface RobotsList {
   realRobotsList?: Array<RobotsListProps>;
   simulatedRobotsList?: Array<RobotsListProps>;
   error?: Error;
-  mode: number;
 }
 
 export interface Error {
   message: string;
   code: string;
+}
+
+export interface SuccessPayload {
+  realRobotsList: Array<RobotsListProps>;
+  simulatedRobotsList: Array<RobotsListProps>;
 }
 
 export interface getRobotsList {
@@ -57,7 +60,7 @@ export interface getRobotsList {
 
 export interface getRobotsListSuccess {
   type: typeof GET_ROBOTS_LIST_SUCCESS;
-  payload: Array<RobotsListProps>;
+  payload: SuccessPayload;
 }
 
 export interface getRobotsListFailed {
@@ -65,13 +68,7 @@ export interface getRobotsListFailed {
   error: Error;
 }
 
-export interface changeMode {
-  type: typeof CHANGE_MODE;
-  mode: number;
-}
-
 export type RobotsListActionTypes =
   | getRobotsList
   | getRobotsListSuccess
-  | getRobotsListFailed
-  | changeMode;
+  | getRobotsListFailed;

@@ -1,6 +1,7 @@
 import { ThunkAction } from 'redux-thunk';
 import { AnyAction } from 'redux';
 import api from 'services/api';
+import { toast } from 'react-toastify';
 import { DispatchType, RootStateType } from '../index';
 import * as actions from './broker.actions';
 
@@ -17,5 +18,6 @@ export const getBrokers = ()
     dispatch(actions.getBrokersSuccess(formData));
   } catch (error: any) {
     dispatch(actions.getBrokersFailed(error.response.data));
+    toast.error('Não foi possível recuperar as corretoras');
   }
 };

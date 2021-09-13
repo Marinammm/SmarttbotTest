@@ -1,6 +1,7 @@
 import { ThunkAction } from 'redux-thunk';
 import { AnyAction } from 'redux';
 import api from 'services/api';
+import { toast } from 'react-toastify';
 import { DispatchType, RootStateType } from '../index';
 import * as actions from './overview.actions';
 
@@ -12,5 +13,6 @@ export const getOverview = ()
     dispatch(actions.getOverviewSuccess(data));
   } catch (error: any) {
     dispatch(actions.getOverviewFailed(error.response.data));
+    toast.error('Não foi possível recuperar os dados');
   }
 };

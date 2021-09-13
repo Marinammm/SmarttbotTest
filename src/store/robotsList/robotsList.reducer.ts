@@ -1,5 +1,4 @@
 import {
-  CHANGE_MODE,
   GET_ROBOTS_LIST,
   GET_ROBOTS_LIST_FAILED,
   GET_ROBOTS_LIST_SUCCESS,
@@ -12,7 +11,6 @@ const initialState: RobotsList = {
   error: undefined,
   realRobotsList: undefined,
   simulatedRobotsList: undefined,
-  mode: 1,
 };
 
 const robotsListReducer = (
@@ -29,8 +27,8 @@ const robotsListReducer = (
       return {
         ...state,
         loading: false,
-        realRobotsList: state.mode ? action.payload : state.realRobotsList,
-        simulatedRobotsList: !state.mode ? action.payload : state.simulatedRobotsList,
+        realRobotsList: action.payload.realRobotsList,
+        simulatedRobotsList: action.payload.simulatedRobotsList,
         error: undefined,
       };
     case GET_ROBOTS_LIST_FAILED:
@@ -38,11 +36,6 @@ const robotsListReducer = (
         ...state,
         loading: false,
         error: action.error,
-      };
-    case CHANGE_MODE:
-      return {
-        ...state,
-        mode: action.mode,
       };
     default: return state;
   }
