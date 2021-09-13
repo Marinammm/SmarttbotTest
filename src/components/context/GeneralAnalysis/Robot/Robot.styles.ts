@@ -72,6 +72,17 @@ export const LastPaper = styled.div`
   padding: 10px 15px;
 `;
 
+export const EmptyLastPaper = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  
+  span {
+    font-size: 14px;
+  }
+`;
+
 export const Position = styled.span`
   font-size: 26px;
   font-weight: 700;

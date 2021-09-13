@@ -15,6 +15,7 @@ import { Subtitle, ColorfulNumber } from 'utils/global.styles';
 import { IoMdArrowDropdown, IoMdArrowDropup } from 'react-icons/io';
 import { GiPauseButton } from 'react-icons/gi';
 import { IoPlay } from 'react-icons/io5';
+import { FaRegSadTear } from 'react-icons/fa';
 import { formatMoney } from 'utils/auxiliary';
 import * as S from './Robot.styles';
 
@@ -79,7 +80,7 @@ const Robot: FC<RobotProps> = ({ robot }: RobotProps) => {
             </S.Tags>
 
             <S.LastPaper>
-              {robot.last_paper?.id && (
+              {robot.last_paper?.id ? (
                 <>
                   <S.Position>{robot.last_paper?.position}</S.Position>
                   <S.Paper>
@@ -97,6 +98,11 @@ const Robot: FC<RobotProps> = ({ robot }: RobotProps) => {
                     </S.Profit>
                   </S.Values>
                 </>
+              ) : (
+                <S.EmptyLastPaper>
+                  <FaRegSadTear />
+                  <span>Não encontrado</span>
+                </S.EmptyLastPaper>
               )}
             </S.LastPaper>
 
